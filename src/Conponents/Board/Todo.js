@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./Todo.module.css";
 import { useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
-import Stack from '@mui/material/Stack';
-
+import AddIcon from "@mui/icons-material/Add";
+import Stack from "@mui/material/Stack";
 
 const Todo = () => {
   const [data, setdata] = useState("");
@@ -14,22 +13,34 @@ const Todo = () => {
   };
 
   const handleClick = () => {
-    (data.length > 0 ) && setinfo([...info, data]);
+    setinfo([...info, data]);
     setdata("");
   };
 
   return (
     <div className={styles.container}>
-      <input className= {styles.inputfield} type="text" value={data} onChange={handleChange} />
+      <input
+        className={styles.inputfield}
+        type="text"
+        value={data}
+        onChange={handleChange}
+      />
       <Stack>
-        {  info.map((item, index) => {
-          return <box className = {styles.inputdata} key={index}> {item}</box>;
+        {info.map((item, index) => {
+          return (
+            <box className={styles.inputdata} key={index}>
+              {" "}
+              {item}
+            </box>
+          );
         })}
-
       </Stack>
-      <button onClick={handleClick}><span><AddIcon/></span> Add a Card</button>
-
-      
+      <button onClick={handleClick}>
+        <span>
+          <AddIcon />
+        </span>{" "}
+        Add a Card
+      </button>
     </div>
   );
 };
