@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className={styles.container} >
       <div className={styles.leftnavbar}>
-       <h4>kakan project board</h4>
+       <h4>kakan board</h4>
        <button><StarBorderIcon/></button>
        <button><GroupIcon/>Work Space</button>
        <button> <ViewWeekIcon/>board</button>

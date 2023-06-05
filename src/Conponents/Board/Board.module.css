@@ -1,3 +1,30 @@
-.container{
+.todocontainer{
     display: flex;
+    margin: 10px;
+    flex-direction: row;
+    
+    width: 25vw;
+    height: 100vh;
+}
+.todo__container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 1px solid gray;
+
+
+}
+.button{
+    padding: 10px;
+    font-size: larger;
+    background-color: white;
+    border-radius: 10px;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+.userinput{
+    background-color: rgb(220, 104, 104);
+    border: 1px solid gray;
 }
