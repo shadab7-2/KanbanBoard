@@ -1,15 +1,32 @@
-import React, { useState } from "react";
-import styles from "./Todo.module.css";
-import AddIcon from "@mui/icons-material/Add";
-import Stack from "@mui/material/Stack";
-import { editIndexState, sumState, dataState, infoState } from "../../atom";
-import { useRecoilState } from "recoil";
+import React, { useState, useEffect } from 'react';
+import styles from './Todo.module.css';
+import AddIcon from '@mui/icons-material/Add';
+import Stack from '@mui/material/Stack';
+import { useRecoilState } from 'recoil';
+import { todoListsState } from '../../atom';
 
-const Todo = () => {
-  const [data, setData] = useState("");
+const Todo = ({ todoList }) => {
+  const [data, setData] = useState('');
   const [info, setInfo] = useState([]);
-  const [sum, setSum] = useRecoilState(sumState);
-  const [editIndex, setEditIndex] = useRecoilState(editIndexState);
+  const [sum, setSum] = useState(0);
+  const [todoLists, setTodoLists] = useRecoilState(todoListsState);
+
+  useEffect(() => {
+    if (todoList && todoList.items) {
+      setInfo(todoList.items);
+      setSum(todoList.items.length);
+    }
+  }, [todoList]);
+
+  useEffect(() => {
+    const updatedTodoLists = todoLists.map((list) => {
+      if (list.id === todoList.id) {
+        return { ...list, items: info };
+      }
+      return list;
+    });
+    setTodoLists(updatedTodoLists);
+  }, [info]);
 
   const handleChange = (e) => {
     setData(e.target.value);
@@ -20,11 +37,10 @@ const Todo = () => {
       setInfo([...info, data]);
       setSum(sum + 1);
     }
-    setData("");
+    setData('');
   };
 
   const updateHandler = (index) => {
-    setEditIndex(index);
     setData(info[index]);
   };
 
@@ -32,8 +48,7 @@ const Todo = () => {
     const updatedInfo = [...info];
     updatedInfo[index] = data;
     setInfo(updatedInfo);
-    setEditIndex(null);
-    setData("");
+    setData('');
   };
 
   const deleteHandler = (index) => {
@@ -56,18 +71,11 @@ const Todo = () => {
         {info.map((item, index) => {
           return (
             <div className={styles.inputdata} key={index}>
-              {editIndex === index ? (
-                <div>
-                  <input type="text" value={data} onChange={handleChange} />
-                  <button onClick={() => saveHandler(index)}>Save</button>
-                </div>
-              ) : (
-                <div>
-                  {item}
-                  <button onClick={() => updateHandler(index)}>Update</button>
-                  <button onClick={() => deleteHandler(index)}>Delete</button>
-                </div>
-              )}
+              <div>
+                {item}
+                <button onClick={() => updateHandler(index)}>Update</button>
+                <button onClick={() => deleteHandler(index)}>Delete</button>
+              </div>
             </div>
           );
         })}
@@ -76,7 +84,7 @@ const Todo = () => {
       <button onClick={handleClick}>
         <span>
           <AddIcon />
-        </span>{" "}
+        </span>{' '}
         Add a Card
       </button>
     </div>

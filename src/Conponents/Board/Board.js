@@ -1,17 +1,41 @@
-import React, { useState } from "react";
-import Todo from "./Todo";
-import styles from "./Board.module.css";
-import { useRecoilState } from "recoil";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Todo from './Todo';
+import styles from './Board.module.css';
+import { useRecoilState } from 'recoil';
+import { todoListsState } from '../../atom';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function Board() {
+const Board = () => {
+  const { boardId } = useParams();
   const [todoCount, setTodoCount] = useState(0);
+  const [todoLists, setTodoLists] = useRecoilState(todoListsState);
+
+  useEffect(() => {
+    // Load todo lists from local storage on component mount
+    const storedTodoLists = localStorage.getItem('todoLists');
+    if (storedTodoLists) {
+      setTodoLists(JSON.parse(storedTodoLists));
+      setTodoCount(JSON.parse(storedTodoLists).length);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save todo lists to local storage whenever it changes
+    localStorage.setItem('todoLists', JSON.stringify(todoLists));
+    setTodoCount(todoLists.length);
+  }, [todoLists]);
 
   const handleAddTodo = () => {
-    setTodoCount(todoCount + 1);
+    const newTodoList = {
+      id: uuidv4(),
+      title: 'New List',
+    };
+    setTodoLists([...todoLists, newTodoList]);
   };
 
-  const todoComponents = [...Array(todoCount)].map((_, index) => (
-    <Todo key={index} className={styles.userinput} />
+  const todoComponents = todoLists.map((todoList) => (
+    <Todo key={todoList.id} todoList={todoList} className={styles.userinput} />
   ));
 
   return (
@@ -30,4 +54,6 @@ export default function Board() {
       </div>
     </div>
   );
-}
+};
+
+export default Board;
