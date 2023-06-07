@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Todo from "./Todo";
 import styles from "./Board.module.css";
 
+
 export default function Board() {
   const [todoCount, setTodoCount] = useState(0);
 
@@ -11,6 +12,7 @@ export default function Board() {
   };
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.todo__container}>
         {[...Array(todoCount)].map((_, index) => (
