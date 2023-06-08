@@ -1,12 +1,17 @@
-
-import './App.css';
-import Home from './Conponents/Home/Home';
+import "./App.css";
+import Home from "./Conponents/Home/Home";
+import { RecoilRoot } from "recoil";
+import { Route, BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Home/>
-    </div>
+    
+      <RecoilRoot>
+        <div className="App">
+          <Home />
+        </div>
+      </RecoilRoot>
+    
   );
 }
 
