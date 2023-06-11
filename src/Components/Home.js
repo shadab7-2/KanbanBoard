@@ -10,7 +10,7 @@ const Home = () => {
     <Navbar/>
     <Routes>
         <Route path='/' element={<Board/>}/>
-        <Route path='/dialogbox:id' element={<DialogBox/>}/>
+        <Route path="/dialogbox/:content" element={<DialogBox />} />
     </Routes>
    </Router>
   )

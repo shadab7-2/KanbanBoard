@@ -10,9 +10,10 @@ import { useParams } from 'react-router-dom';
 export default function Board() {
   const [lists, setLists] = useState([]);
   const navigate= useNavigate();
-  const handleNavigate = () =>{
-           navigate("/dialogbox")  
-  }
+  const handleNavigate = (id) => {
+    navigate(`/dialogbox/${id}`);
+  };
+  
  
   useEffect(() => {
     const savedLists = localStorage.getItem("lists");
@@ -35,7 +36,7 @@ export default function Board() {
       const updatedLists = prevLists.map((list) => {
 
         if (list.id === listId) {
-          const newItem = { id: uuidv4(), content: item };
+          const newItem = { id: uuidv4(), id: item };
             
           return { ...list, items: [...list.items, newItem] };
         }
@@ -127,8 +128,7 @@ export default function Board() {
                       {...provided.dragHandleProps}
                       className={styles.item}
                     >
-                      <button onClick={handleNavigate}>  {item.content}</button>
-                     
+                     <button onClick={() => handleNavigate(item.id)}>{item.id}</button>
                       <button onClick={() => deleteItem(item.id)}><DeleteIcon/></button>
                     </li>
 
@@ -157,3 +157,4 @@ export default function Board() {
     </DragDropContext>
   );
 }
+

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import styles from "./Dialogbox.module.css";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,56 +10,69 @@ import QuillEditor from "./Quill";
 import SubjectIcon from "@mui/icons-material/Subject";
 import TextField from "@mui/material/TextField";
 import { Avatar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { Visibility } from "@mui/icons-material";
 
 const DialogBox = () => {
-  const [showDescription, setShowDescription] = useState(true);
-  const [showActivity, setShowActivity] = useState(true);
-  const [show, setShow] = useState(true);
-  const[watch, setWatch] = useState(false);
-  const infodata = JSON.parse(localStorage.getItem("lists"));
-  console.log(infodata);
-  const handleDescription = () => {
-    setShowDescription(!showDescription);
-  };
-
-  const handleActivity = () => {
-    setShowActivity(!showActivity);
-  };
-  const handleShowcomment = () => {
-    setShow(!show);
-  };
-  const handleWatch= () =>{
-    setWatch(!watch)
-  }
-  const navigate = useNavigate();
-  const handleClose = () => {
-    navigate("/");
-  };
-
-  return (
-    <div className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles.windoIcon}>
-            <CallToActionIcon />
+    const { content } = useParams();
+    const navigate = useNavigate();
+    const [showDescription, setShowDescription] = useState(true);
+    const [showActivity, setShowActivity] = useState(true);
+    const [show, setShow] = useState(true);
+    const [watch, setWatch] = useState(false);
+    const [infodata, setInfodata] = useState([]);
+    const { id } = useParams();
+    useEffect(() => {
+        const savedLists = localStorage.getItem("lists");
+        if (savedLists) {
+          const parsedLists = JSON.parse(savedLists);
+          const list = parsedLists.find((item) => item.items.some((i) => i.id === id));
+          if (list) {
+            setInfodata([list.id, list.items]);
+          }
+        }
+      }, [id]);
+      
+  
+    const handleDescription = () => {
+      setShowDescription(!showDescription);
+    };
+  
+    const handleActivity = () => {
+      setShowActivity(!showActivity);
+    };
+  
+    const handleShowcomment = () => {
+      setShow(!show);
+    };
+  
+    const handleWatch = () => {
+      setWatch(!watch);
+    };
+  
+    const handleClose = () => {
+      navigate('/');
+    };
+  
+    return (
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <div className={styles.windoIcon}>
+              <CallToActionIcon />
+            </div>
+  
+            <div className={styles.title}>
+              <h5>{content}, </h5>
+              <span> in </span>
+              {watch && <Visibility />}
+            </div>
+  
+            <button className={styles.closebutton} onClick={handleClose}>
+              <CloseIcon />
+            </button>
           </div>
-
-          <div className={styles.title}>
-            <h5>{infodata[1]}, </h5>
-            <span> in {infodata[0]}</span>
-            {
-              watch?<Visibility/>:''
-            }
-          </div>
-
-          <button className={styles.closebutton} onClick={handleClose}>
-            
-            <CloseIcon />
-          </button>
-        </div>
         <div className={styles.sideboard}>
           <div className={styles.leftside}>
             <div className={styles.notification}>
