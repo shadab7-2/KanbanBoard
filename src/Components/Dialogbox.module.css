@@ -1,0 +1,131 @@
+.main{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+.header{
+       background-color: lightgray;
+       height: 60px; 
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+       justify-content: center;
+       gap: 15px;
+       padding: 15px;
+}
+.closebutton{
+    border: none;
+    background-color: lightgray;
+}
+.title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+   
+    
+}
+.sideboard{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+.leftside{
+    display: flex;
+    flex: .7;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+}
+.notification{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    font-size: smaller;
+    margin: 20px;
+   
+}
+.notification >span{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    padding: 5px;
+    gap: 15px;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    margin: 20px;
+}
+.description>span{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    padding: 5px;
+    gap: 15px;
+}
+.activity{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    margin: 20px;
+}
+.activity>span{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    padding: 5px;
+    gap: 15px;
+}
+/* .notificaion{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    margin: 20px;
+} */
+.rightside{
+    display: flex;
+    flex-direction: column;
+    flex: .3;
+    padding: 10px;
+   
+}
+.comment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+     gap: 10px;
+}
+
+.button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+   gap: 10px;
+   width: 130px;
+}
+.watch{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    gap: 20px;
+}

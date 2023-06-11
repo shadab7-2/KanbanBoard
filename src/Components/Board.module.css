@@ -1,0 +1,73 @@
+.list__card{
+   margin: 10px;
+   padding: 10px;
+   border-radius: 1px solid gray;
+   background-color: aqua;
+   border-radius: 10px;
+ 
+}
+
+.add__button{
+    margin: 10px ;
+    padding: 10px;
+    font-weight: bold;
+    border: 2px solid blueviolet;
+    border-radius: 10px;
+    background-color: rgb(87, 165, 167);
+} 
+.add__button:hover{
+    background-color: lightsalmon;
+}
+.add__button:focus {
+  animation: button 2s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+@keyframes add__button {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+}
+.list__contanier{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.input__container{
+    display: flex;
+    flex-direction: row;justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 0;
+}
+.input__container >input,button{
+    background-color: white;
+    border: 0;
+    padding: 5px;
+
+}
+.item__container{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid slateblue;
+    gap: 5px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: antiquewhite;
+   
+}
+.item >button{
+    background-color: 0;
+    border: 0;
+    background-color: white;
+}
